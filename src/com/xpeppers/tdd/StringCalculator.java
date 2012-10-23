@@ -16,12 +16,16 @@ public class StringCalculator {
 
 	private static String[] extractNumbersFrom(String stringOfNumbers) {
 		String delimiter = ",";
-		if (stringOfNumbers.startsWith("//")) {
+		if (hasCustomDelimiterSection(stringOfNumbers)) {
 			String[] tokens = stringOfNumbers.split("\n", 2);
-			delimiter = extract_delimiter_from(tokens[0]);			
-			stringOfNumbers = tokens[1];		
+			delimiter = extract_delimiter_from(tokens[0]);
+			stringOfNumbers = tokens[1];
 		}
 		return stringOfNumbers.replaceAll("\n", delimiter).split(delimiter);
+	}
+
+	private static boolean hasCustomDelimiterSection(String stringOfNumbers) {
+		return stringOfNumbers.startsWith("//");
 	}
 
 	private static String extract_delimiter_from(String delimiterSection) {
